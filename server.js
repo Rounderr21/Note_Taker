@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const uuid =require('uuid');
+
 //importing db.json
 const notesData = require('./db/db.json');
 
@@ -8,6 +10,7 @@ const express = require('express');
 
 //importing built-in Node.ks package 'path to resolve path of files that located on the server
 const path = require('path');
+const { Console } = require('console');
 
 //initalize an instance of Express.js
 const app = express();
@@ -19,35 +22,30 @@ const PORT = 3001;
 app.use(express.static('public'));
 
 //standard get to display index.html
-app.get('/', (req,res) => res.sendFile('naviate to /notes and other html'));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/public/index.html')));
+
 
 //setting path/route for notes to be set when clicked upon
 app.get('/notes', (req,res) =>
-    res.sendFile(path.join(__dirname, 'public/notes.html'))
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-//using express to make path for json values for the notes
-app.get('api/notes', (req,res) => res.json(notesData));
-
-//TEST THIS AS I DONT THINK THIS IS CORRECT TO POST DATA TO THE SERVER IN JSON FILE
-app.post('api/notes', (req,res) => res.json(notesData));
-
-//GETfoute that returns a specific title
-app.get('api/notes/ :title', (req,res) => {
-    //MAY NEED TO CHANGE.TERM TO .TITLE
-    //JUST CONSOLE.LOG REQ.PARAMS AND SEE WHAT THE TITLE IS UNDER TO FIND ANSWER
-    const requestedTitle = req.params.term.toLowercase();
-
-    //looping thru notesData to enduer what you are looking for is in there
-    for (let i = 0; i <notesData; i++){
-        if(requestedTitle === notesData[i].term.toLowercase()){
-            return read.json(notesData[i]);
-        }
-    }
-
-    return res.json('no match has been found.')
-});
-
+// Handle GET request to retrieve notes
+app.get('/api/notes', (req, res) => {
+    console.log(`${req.method} request has been received`);
+    return res.json(notesData);
+  });
+  
+  // Handle POST request to create a new note
+  app.post('/api/notes', (req, res) => {
+    console.log(req.body);
+    const { title, text } = req.body;
+    const newNote = {title, text, id: uuid()};
+    notesData.push(newNote);
+    // Save the updated notes to db.json
+    fs.writeFileSync('./db/db.json', JSON.stringify(notesData));
+    return res.json(newNote);
+  });
 //how to get port to listen and to use server
 app.listen(PORT, () =>
     console.log(`Example app listening at http://localhost:${PORT}`)
