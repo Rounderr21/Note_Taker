@@ -1,6 +1,21 @@
 [
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
+  {
+    "title": "Breakfast Meeting",
+    "text": "Team meeting at 7am. order the hot cocoa",
+    "id": 1
+  },
+  {
+    "title": "Dentist Appointment",
+    "text": "This friday for some routine cleaning",
+    "id": 2
+  },
+  { "title": "Bday party", 
+    "text": "Neice's bday party this Saturday",
+    "id": 3
+  },
+  {
+    "title": "Golf Tourney",
+    "text": "Traveling down south to play 18 holes of relaxation",
+    "id": 4
+  }
 ]
