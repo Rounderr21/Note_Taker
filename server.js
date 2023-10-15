@@ -48,7 +48,7 @@ app.get('/api/notes', (req, res) => {
     return res.json(newNote);
   });
   
-  // delete route
+  // Implement DELETE route
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id;
   // Find the index of the note with the provided ID
@@ -58,6 +58,9 @@ app.delete('/api/notes/:id', (req, res) => {
     notesData.splice(index, 1);
     // Save the updated notes to db.json
     fs.writeFileSync('./db/db.json', JSON.stringify(notesData));
+    return res.status(204).send(); // 204 No Content
+  } else {
+    return res.status(404).json({ error: 'Note not found' });
   }
 });
 //how to get port to listen and to use server
