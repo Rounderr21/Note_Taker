@@ -15,7 +15,7 @@ Started with no starter code for server.js. started by installing all npm's that
 Github
 Pushed out starter code, Javascript, and README when finishing any coding edits, as to ensure I could go back at anytime to earlier designs if need be.
 
-Project is located at this URL: https://github.com/Rounderr21/Logo-Maker
+Project is located at this URL: https://github.com/Rounderr21/Note_Taker
 
 Screenshot of the Project:
 ![alt text](./public/assests/images/Screenshot%20(116).png)
