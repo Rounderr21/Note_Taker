@@ -18,8 +18,7 @@ const { Console } = require('console');
 const app = express();
 
 //specifying what port the express.js server will run on
-const PORT = 3001;
-
+const PORT = process.env.PORT || 3000;
 //static middleware point to the public folder
 app.use(express.static('public'));
 app.use(express.json());
